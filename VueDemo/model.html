@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="https://unpkg.com/vue/dist/vue.js"></script>
+		<style>
+			.bd{border-bottom:1px solid #ccc;text-align: center;}
+			.bd input{
+				border:none;
+				/*outline:none;*/
+				text-align: right;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="appId">
+			<p>{{message}}</p>
+		
+			<p><input type="text" v-model="message" /></p>
+			
+			<p><span>trim的字符串长度：{{trim.length}}</span></p>
+			<p><input type="text" v-model="trim" /></p>
+			
+			<p><span>trim2的字符串长度（加修饰符trim的）：{{trim2.length}}</span></p>
+			<p><input type="text" v-model.trim="trim2" /></p>
+			
+			<p><span>加修饰符lazy的字段：{{lazy}}</span></p>
+			<p><input type="text" v-model.lazy="lazy" /></p>
+			
+			<!--<p><span>{{number}}</span></p>
+			<p>设定只能输入数字：<input type="number" v-model.number="number" placeholder="套" style="text-align: center"/></p>-->
+			
+			<p class="bd">
+				<input type="number" v-model.number="number" maxlength="2" placeholder="套" >
+				<span v-show="number != ''">套</span>
+			</p>
+		</div>
+		
+		
+		
+		<script>
+			var idApp = new Vue({
+				el:"#appId",
+				data:{
+					message:'hello vue.js!',
+					number:'',
+					trim:'',
+					trim2:'   xxx   ',
+					lazy:''
+				}
+			});
+			
+			
+		</script>
+	</body>
+</html>

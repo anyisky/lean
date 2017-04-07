@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= pagaObj.title %></title>
+    <link type="text/css" rel="stylesheet" href="http://dui.dooioo.com/public/css/main.css">
+	<script type="text/javascript" src="http://dui.dooioo.com/public/js/jquery-1.4.2.min.js"></script>
+  </head>
+  <body>
+	<div class="container">
+		<p class="mt_10 txtRight">
+			<a href="/edit?id=<%= attach.id%>" class="btn-small btn-silver in_block ml_5">编辑</a>
+			<a href="javascript:;" itemid="<%= attach.id%>" class="btn-small btn-red in_block ml_5 js_del">删除</a>
+		</p>
+		<p class="mt_10"><img src="<%= attach.path %>" alt="<%= attach.sysname %>" /></p>
+		<p class="mt_10"><%= attach.sysname %></p>
+		<p class="mt_10"><%= attach.updateTime %></p>
+	</div>
+	<script>
+	$('.js_del').click(function(){
+		var self = $(this);
+		if(confirm('确定要删除吗？')){
+			var id = self.attr(itemid);
+			window.location.href = '/delete?id='+id;
+		}
+	});
+	</script>
+  </body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link type="text/css" rel="stylesheet" href="http://dui.dooioo.com/public/css/main.css" />
+		<script src="https://unpkg.com/vue/dist/vue.js"></script>
+		<script src="../../node_modules/vue-resource/dist/vue-resource.js"></script>
+	</head>
+	<body>
+		<div id="myapp">
+	        <myvue-autocomplete 
+	        	v-bind:placeholder="placeholder" 
+	        	v-bind:inputkeyword="searchKey" 
+	        	v-bind:url="url" 
+	        	v-bind:otherparams="otherparams" 
+	        	v-bind:focusajax="focusajax">
+	        </myvue-autocomplete>
+	    </div>
+		
+		<script>
+			var myvueAutocomplete = {
+				props:['placeholder','inputkeyword','url','otherparams','focusajax'],
+				data: function() {
+					return {
+						keyword:'',
+						hightIndex:0,
+						sugList:[],
+						showList:false
+					};
+				},
+			    template:`
+			    	<div class="in_block pos_r">
+			    		<input type="text" class="txtNew js_keyword" autocomplete="off" 
+			    		:placeholder="placeholder" 
+			    		v-model="keyword"
+			    		v-on:click="handleClickAndFocus()" 
+			    		v-on:focus="handleClickAndFocus()" 
+			    		v-on:keyup="handleKeyup($event)" />
+			    		
+			    		<div class="autoComplate" v-show="showList" style="left:0; top: 22px; max-height:256px; overflow-y:auto; overflow-x:hidden;">
+			    			<ul>
+			    				<li v-for="(item,index) in sugList" v-bind:class="activeClass(index)">
+			    					<a href="#">{{item.estateName}}</a>
+			    				</li>
+			    			</ul>
+			    		</div>
+			    	</div>
+			    `,
+			    methods:{
+			    	_getData:function(val){
+			    		this.$http.jsonp(this.url,{params:{keyword:val},jsonp:'jsoncallback'}).then(function(response){
+
+			    			this.sugList = JSON.parse(response.bodyText).autoEstate;
+			    			this.$set('showList',this.sugList > 0);
+			    		},function(response){
+			    			//error callback
+			    		});
+			    	},
+			    	handleKeyup: function(e){
+			
+			            let keycode = e.keyCode;
+			            //if(!this.hightIndex) return;//hightIndex  其实是当前高亮项的下标
+			            
+			            switch (keycode) {
+			            	case 40 : {//down
+			            		this.hightIndex += 1;
+			            		break;
+			            	}
+			            	case 38 : {//up
+			            		this.hightIndex -= 1;
+			            		break;
+			            	}
+			            	case 13 : {//enter
+			            		this.$emit('on-select-list',this.sugList[this.hightIndex]);//告知父节点选中的值
+			            		break;
+			            	}
+			            	case 27 : {//esc
+			            		this.sugList = [];
+			            		this.$set('showList',this.sugList > 0);
+			            		break;
+			            	}
+			            	default : {
+			            		this._getData(this.keyword);
+			            		break;
+			            	}
+			            }
+			            
+			            let listLen = this.sugList.length - 1;
+			            let temp = this.hightIndex < 0 ? listLength : this.hightIndex;
+			            this.hightIndex = this.hightIndex > listLen ? 0 : temp;
+			            
+			        },
+			        activeClass:function(i) {
+			        	return {
+			        		'on' : i === this.hightIndex
+			        	};
+			        },
+			        handleClickAndFocus: function(){
+			            if(this.focusajax){
+			            	//直接发ajax
+			            	this._getData(this.keyword);
+			            }else{
+			            	this.sugList = [];
+			            	this.$set('showList',this.sugList > 0);
+			            }
+			        }
+			    }
+			};
+			
+			new Vue({
+		        el:"#myapp",
+		        components:{
+		            'myvue-autocomplete':myvueAutocomplete
+		        },
+		        data:{
+		        	searchKey:'',
+		        	placeholder:'请输入XXX',
+		        	url:'http://loupan.dooioo.com/api/estate/getAutoEstateName',
+		        	otherparams:{},
+		        	focusajax:false
+		        }
+    		});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		
+		<script src="https://unpkg.com/vue/dist/vue.js"></script>
+		<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+	</head>
+	<body>
+		<div id="app">
+		  	<h1>Hello App!</h1>
+		  	<p>
+		    	<router-link to="/foo">Go to Foo</router-link>
+		    	<router-link to="/bar">Go to Bar</router-link>
+		    	<router-link to="/a">Go to a</router-link>
+		  	</p>
+		
+			<router-view></router-view>
+		</div>
+		
+		<script>
+			
+			
+			const router = new VueRouter({
+				routes: [
+				    {
+						path:'/',
+						redirect: {name:'/b'}
+					},
+					{
+						path:'/a',
+						component:{template:'<div>a</div>'},
+						alias:'/b'
+					},
+					{
+						path:'/foo',
+						name:'foo1',
+						component:{template:'<div>foo</div>'}
+					},
+					{
+						path:'/bar',
+						name:'bar1',
+						component:{template:'<div>bar</div>'}
+					}
+			  	]
+			});
+			
+			const app = new Vue({
+				el:'#app',
+				router
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= pagaObj.title %></title>
+    <link type="text/css" rel="stylesheet" href="http://dui.dooioo.com/public/css/main.css">
+	<script type="text/javascript" src="http://dui.dooioo.com/public/js/jquery-1.4.2.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+		<p class="mt_5 clearfix">
+			<span class="left mt_4">共<span class="green"><%=picList.length %></span>条数据</span>
+			<a href="/add" class="btn-small btn-green in_block right">新增</a>
+		</p>
+		<table width="100%" cellspacing="0" class="tableListNew mt_10">
+			<tr class="trHead">
+				<td>系统名称</td>
+				<td>文件url</td>
+				<td>更新时间</td>
+				<td>操作</td>
+			</tr>
+			
+			<% if (picList.length) { %>  
+			  <tr>
+				<% picList.forEach(function(item){ %>  
+					<td><a href="/detail?id=<%= item.id%>" target="_blank"><%=item.sysname %></a></td>
+					<td><%= item.path%></td>
+					<td><%= item.updateTime%></td>
+					<td>
+						<a href="/edit?id=<%= item.id%>" class="btn-small btn-blue in_block ml_5">编辑</a>
+						<a href="javascript:;" itemid="<%= item.id%>" class="btn-small btn-red in_block ml_5 js_del">删除</a>
+					</td>
+				<% }) %>  
+			 </tr>
+			<% }else{ %> 
+				<tr>
+					<td colspan="3">暂无数据</td>
+				</tr>
+			<% }%>
+		</table>
+	</div>
+	<script>
+	$('.js_del').click(function(){
+		var self = $(this);
+		if(confirm('确定要删除吗？')){
+			var id = self.attr(itemid);
+			window.location.href = '/delete?id='+id;
+		}
+	});
+	</script>
+  </body>
+</html>

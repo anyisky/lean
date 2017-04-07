@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="node_modules/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			{{Date(a)}}
+			<div>{{b + 1}}</div>
+			<div>{{calc}}</div>
+		</div>
+		<script>
+			
+			var app = new Vue({
+				el:"#app",
+				data:{//这里只是初始化，外部可以改变这边的变量值的
+					a:'2017/3/6',
+					b:2,
+					c:3
+				},
+				computed:{
+					calc:function(){
+						return this.c + 1;
+					}
+				}
+			});
+			
+		</script>
+	</body>
+</html>

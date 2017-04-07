@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="node_modules/vue/dist/vue.js"></script>
+		<style>
+			.base{
+				width:100px;
+				height:40px;
+				border:1px solid red;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<div class="base" v-bind:style="baseStyles">测试</div>
+		</div>
+		<script>
+			
+			var app = new Vue({
+				el:"#app",
+				data:{
+					baseStyles:{
+						'transform':'rotate(7deg)',
+						'-ms-transform':'rotate(7deg)',
+						'-moz-transform':'rotate(7deg)',
+						'-webkit-transform':'rotate(7deg)',
+						'-o-transform':'rotate(7deg)'
+					}
+				}
+				
+			});
+			
+		</script>
+	</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="https://unpkg.com/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<p>vue的内置过滤器(2.0版本中都取消了，如果需要用到相关的，可以去查看1.0的源码，进行自定义处理)：http://www.cnblogs.com/lily1010/p/5835712.html</p>
+			<p>1.0对应的内置的filters 见vue1.0filters.js文件</p>
+        	
+			<br>
+			<br>
+			<div>这是调用filterA后：{{message | filterA}}</div>
+			<br>
+			<p>filter执行按顺序进行：</p>
+			<div>这是调用filterA，filterB后：{{message | filterA | filterB(10) }}</div>
+			<br>
+			<div>这是调用filterB，filterA后：{{message2 | filterB(10) | filterA}}</div>
+			<br>
+			<p>带多个参数的filter，跟ng的规则差不多：</p>
+			<div>这是调用filterC后：{{message | filterC(2,3)}}</div>
+			<br>
+			<p>全局filter -- 跟组件一样  要写在实例化前面，才能使用，编写调用方式和ng的都类似：</p>
+			<div>这是调用全局filter test-filter 经过js处理后的字符串：{{jsfilter}}</div>
+			<br>
+			<div>这是直接在html上调用全局filter：{{message | test-filter}}</div>
+		</div>
+		<script>
+			//全局filter -- 跟组件一样  要写在实例化前面
+			Vue.filter('test-filter',function(value,smbol){
+				if(smbol){
+					return value + smbol + '我是全局filter';
+				}
+				return value + '我是全局filter';
+			});
+			
+			var app = new Vue({
+				el:"#app",
+				data:{//这里只是初始化，外部可以改变这边的变量值的
+					message:"hello vue!",
+					message2:"hello vue!",
+					jsfilter:''
+				},
+				filters:{
+					filterA:function(value){
+						if(!value){return '';}
+						
+						value = '(' + value + '===>我是filterA后的value)';
+						return value;
+					},
+					filterB:function(value,rule1){
+						if(!value){return '';}
+						
+						value = rule1 > 9 ? ('('+value + '，我是符合条件rule1 > 9的 filterB)') : ('('+value + '，我是不符合条件rule1 > 9的 filterB后的value)');
+						return value;
+					},
+					filterC:function(value,rule1,rule2){
+						if(!value){return '';}
+						
+						value = rule1 > rule2 ? ('我是带了两个参数的filterC，并且符合rule1 > rule2的结果：'+rule1 + '我是filterC') : ('我是带了两个参数的filterC，是rule1 <= rule2的结果：'+rule2 + '我是filterC');
+						return value;
+					}
+				}
+			});
+			
+		
+			app.jsfilter = Vue.filter('test-filter')('sss','====>');
+			
+		</script>
+	</body>
+</html>

@@ -1,0 +1,66 @@
+html,
+body,
+ul,
+li,
+nav,
+a,
+div {
+  margin: 0;
+  padding: 0; }
+
+.pubmessage, .message-green, .message-red, .message-grey {
+  border: 1px solid #ccc;
+  padding: 10px;
+  color: #333; }
+
+.message-green {
+  border-color: green; }
+
+.message-red {
+  border-color: red; }
+
+.message-grey {
+  border-color: grey; }
+
+.title {
+  color: #00ae66;
+  background-color: red;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+  width: 400px;
+  height: 50px; }
+
+.tagbg {
+  background-color: #00ae66;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  border-radius: 5px;
+  width: 200px;
+  height: 50px; }
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  background: #fff; }
+nav ul:after {
+  content: '.';
+  clear: both;
+  display: block;
+  height: 0;
+  visibility: hidden;
+  font-size: 0;
+  line-height: 0; }
+nav li {
+  float: left;
+  width: 150px; }
+nav a {
+  display: block;
+  padding: 5px;
+  color: #00ae66;
+  text-decoration: none; }
+
+/*# sourceMappingURL=test.css.map */

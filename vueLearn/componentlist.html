@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="http://sh.lianjia.net/public/css/common.css">
+		<script src="node_modules/vue/dist/vue.js"></script>
+		
+	</head>
+	<body>
+		<div id="app">
+			
+			<data-list>
+				<p slot="totalmsg" class="subTitle">近期成交住宅（18套）</p>
+				
+				<div slot="paginageBox" class="page-box comment-list-page-box txtLeft">
+					<a href="javascript:;" class="js_prev">上一页</a>
+					<a href="javascript:;" class="on" page="1">1</a>
+					<a href="javascript:;" page="2">2</a>
+					<a href="javascript:;" page="3">3</a>
+					<a href="javascript:;" page="4">4</a>
+					<a href="javascript:;" class="js_next">下一页</a>
+				</div>
+			</data-list>
+			
+			
+			
+		</div>
+		
+		
+		
+		<script>
+			const datalist = {
+				totalPage:4,
+				recordCount:18,
+				pageNo:1,
+				pageSize:5,
+				list:[
+					{
+						cityCode:"sh",
+						houseSellId:"4315790",
+						title:"紫荆四村 3室1厅 87平米",
+						districtName:"嘉定",
+						districtSpelling:"jiading",
+						plateName:"安亭",
+						plateSpelling:"anting",
+						floorState:"中区/6层",
+						propertyUsage:"公寓",
+						face:"南北",
+						decoration:"中装",
+						metroRemark:"距离11号线安亭站490米",
+						showPrice:260,
+						soldDate:1485014400000,
+						saleUnitPrice:29636,
+						allowedPhoto:"20161024/16df34a8-9061-4f9f-b61e-8ed24e83fe78.jpg"
+					}
+				]
+			};
+			
+			var componentList = {
+				template:'<div>\
+							<slot name="totalmsg"></slot>\
+							<ul>\
+								<li v-for="item in list">\
+									<a href="http:\/\/sh.lianjia.com\/chengjiao\/{{item.cityCode}}{{item.houseSellId}}.html">\
+										<img src="http:\/\/cdn1.dooioo.com\/fetch\/vp\/fy\/gi\/{{item.allowedPhoto}}" />\
+										<div>\
+											<a href="">{{item.title}}</a>\
+											<p class="text1">\
+												<a href="http:\/\/sh.lianjia.com\/chengjiao\/{{item.districtSpelling}}" target="_blank">{{item.districtName}} </a> \
+												<a href="http:\/\/sh.lianjia.com\/chengjiao\/{{item.plateSpelling}}" target="_blank"> {{item.districtName}} </a>\
+												<span> | {{item.floorState}}</span>	\
+												<span> | 朝{{item.face}}</span>\
+												<span> | {{item.decoration}}</span>\
+											</p>\
+											<p class="text2">{{item.metroRemark}}</p>\
+											<p class="text3">\
+												<span class="mr_30"><span class="numbox"><span class="number">{{item.showPrice}}</span>万</span> 挂牌总价</span>\
+												<span class="mr_30"><span class="numbox"><span class="number">{{item.saleUnitPrice}}</span>元/平</span> 挂牌单价</span>\
+											</p>\
+											<span class="f-price">{{item.soldDate}}</span>\
+											<span class="f-sign">链家网签约</span>\
+										</div>\
+									</a>\
+								</li>\
+							</ul>\
+							<slot name="paginageBox"></slot>\
+						</div>',
+				data:function(){
+					return datalist;
+				},
+				methods:{
+					changePageNo:function(){},
+					prev:function(){},
+					next:function(){}
+				}
+			};
+			
+			var app = new Vue({
+				el:"#app",
+				components:{
+					'data-list':componentList
+				}
+				
+			});
+		</script>
+	</body>
+</html>

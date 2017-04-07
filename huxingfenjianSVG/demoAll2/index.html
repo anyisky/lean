@@ -1,0 +1,142 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<link rel="stylesheet" href="http://sh.lianjia.com/public/css/common.css">
+	<link rel="stylesheet" href="http://cdn7.dooioo.com/static/css/ershoufang/detail.css">
+	<link type="text/css" rel="stylesheet" href="http://dui.dooioo.com/public/js/plugs/zoom-viewer/css/style.css" />
+	<style>
+	polygon.hoverable{
+		fill: transparent;
+		stroke:transparent; 
+		stroke-width: 4;
+		cursor: pointer;
+	}
+
+	polygon.hoverable:hover{
+		
+		stroke:#00ae66;   
+	}
+	polygon.current{
+		stroke:#00ae66;   
+	}
+	/*polygon.active{
+		
+		stroke:#00ae66;   
+	}*/
+	.huxing .container .hx_detail{
+		margin-left:10px;
+		width:418px;
+	}
+	.infolist tr{
+		color:#333;
+		background:none;
+	}
+	.infolist tr.active{
+		color:#fff;
+		background:#00ae66;
+	}
+	.infolist tr:hover,.infolist tr.hover{
+		color:#fff;
+		background:#29cc70;
+	}
+	.infolist td{padding:5px;}
+	.infolist td a{color:#333;}
+	.infolist td a:hover{color:#fff;text-decoration:underline}
+	#album{
+		width:500px;
+		height:375px;
+		position:absolute;
+		top:0;
+		left:0;
+	}
+	.backHuxingBtn{
+		color:#fff;
+		border-radius:4px;
+		background:#29cc70;
+		position:absolute;
+		top:-30px;
+		left:0px;
+		padding:2px 4px;
+		z-index:3;
+	}
+	.text{
+		width:500px;
+		text-align:center;
+		color:#333;
+		position:absolute;
+		top:-30px;
+		left:0px;
+		z-index:2;
+	}
+	.arrowbtn{
+		display:block;
+		width:30px;
+		height:60px;
+		background-repeat:no-repeat;
+		position:absolute;
+		
+		top:50%;
+		margin-top:-30px;
+	}
+	.prev{
+		background-image:url(images/arrow_left@1x.png);
+		left:5px;
+	}
+	.next{
+		background-image:url(images/arrow_right@1x.png);
+		right:5px;
+	}
+	</style>
+</head>
+<body>
+	
+	
+	<div class="content-wrapper huxing" id="huxing">
+		<div class="hx_header">
+			<div class="title">户型分间</div>
+			<div class="des" id="huxingAgent">
+				
+			</div>
+		</div>
+		<div class="container">
+			<div class="hx_pic" id="imagebox">
+				<img id="img_huxing" src="">
+				
+				
+				<!-- svg 标签不能用append 而ie直接用html()又不支持，所以用一个层包着 -->
+				<div id="svgAppend"></div>
+				
+				<div id="album" style="display:none">
+					<img src="" />
+					<a href="javascript:;" class="backHuxingBtn js_back"><< 返回户型图</a>
+					<p class="text"></p>
+					<a href="javascript:;" class="arrowbtn prev js_prev"></a>
+					<a href="javascript:;" class="arrowbtn next js_next"></a>
+				</div>
+			</div>
+			<div class="hx_detail" id="huxingfenjian">
+				<!-- <div class="hx_list_noData">分间信息收集中</div> -->
+				<table class="infolist js_infolist" width="100%" cellpadding="0" cellspacing="0">
+				
+				</table>
+			</div>
+		</div>
+	</div>
+	<script src="js/mockData/4.js"></script>
+	<script src="http://sh.lianjia.com/public/js/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="http://dui.dooioo.com/public/js/plugs/zoom-viewer/js/zoom-viewer.js"></script>
+	<script src="js/map.js"></script>
+	<script>
+		var pageNo = 4;
+		$('#img_huxing').attr('src','images/' + pageNo + '.jpg');
+
+		$('#img_huxing').load(function(){
+			dealMap();
+		});
+		
+	</script>
+
+</body>
+</html>

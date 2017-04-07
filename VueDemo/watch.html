@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="https://unpkg.com/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<div id="vueWatch">
+			{{a}}
+		</div>
+		
+		<div id="afterwatch">
+			{{a}}
+		</div>
+		
+		<script>
+			var vueWatchData = {a:1};
+			
+			var afterwatchData = {a:1};
+			
+			var vueWatch = new Vue({
+				el:'#vueWatch',
+				data:vueWatchData,
+				watch:{
+					a:function(newvalue,oldvalue){
+						//console.log(oldvalue);
+						//console.log(newvalue);
+					}
+				}
+			});
+			
+			//console.log(vueWatch.$data);//这里不是单纯的a:1 而是包含set get等方法的一个对象
+			
+			var afterwatch = new Vue({
+				el:'#afterwatch',
+				data:afterwatchData
+			});
+
+			//afterwatch.a = 3;//在这变更，watch中抓不到
+			
+			//这个watch 一定要写在改变a值的后面，否则就监控不到
+			afterwatch.$watch('a',function(newvalue,oldvalue){
+				console.log(oldvalue);
+				console.log(newvalue);
+			});
+			
+			afterwatch.a = 2;
+
+		</script>
+	</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<!-- css -->
+	<link type="text/css" rel="stylesheet" href="http://dui.dooioo.com/public/css/main.css" />
+	<link type="text/css" rel="stylesheet" href="http://dui.dooioo.com/public/css/fileupload.css" />
+	 
+	<!-- js -->
+	<script type="text/javascript" src="http://dui.dooioo.com/public/js/lib/angular.min.js"></script>
+	<!-- 上传指令里有用 dui-if 所以要引入directive.js这个文件 -->
+	<script type="text/javascript" src="http://dui.dooioo.com/public/js/angular/directive/directive.js"></script>
+	<script type="text/javascript" src="angular-upload-3.0.js">
+	</script>
+</head>
+<body >
+	<div><a href="tel:02177889977,1234567">测试逗号</a></div>
+	<br>
+	<div ng-app="yourApp" ng-controller="YourController">		
+		<dui-upload attach-list="attachList" single-submit="true"
+            categroy="IMAGE" domain="lianjia" maxsize="50" multiple="false" max-upload-count="1"
+            precheck-callback="precheckCallback(file)">
+        </dui-upload>
+	</div>	
+	<script>
+	//注入依赖：
+	 var app = angular.module('yourApp', ['dui.directive', 'dui.component.upload']); 
+	  
+	 //控制器
+	 app.controller('YourController', function($scope, $http){
+		//存放附件的双向绑定的数据
+		$scope.attachList = [
+			 {
+				originalFileName: "Jellyfish.jpg",
+				virtualPath: "20170313/236ccd7e-4942-43af-a33f-21c52cf49055.jpg"
+			}
+		];
+		 
+		
+	});
+	</script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+<li class='lh_180'>
+	<span class=''>[admin]</span>
+	<span class=''>开始突破。好的，2分到手！</span>
+</li>
+<li class='lh_180'>
+	<span class=''>[admin]</span>
+	<span class=''>姚明那球</span>
+</li><li class='lh_180'><span>[admin]</span><span>牛逼</span></li><li class='lh_180'><span>[admin]</span><span>测试</span></li><li class='lh_180'><span>[admin]</span><span>show admin</span></li><li class='lh_180'><span>[hcy]</span><span>我也是解说员啦~~ admin 你好</span></li><li class='lh_180'><span>[admin]</span><span>hcy 你好
+</span></li>

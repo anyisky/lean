@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+	  <link type="text/css" rel="stylesheet" href="http://dui.dooioo.com/public/css/main.css" />
+    <link type="text/css" rel="stylesheet" href="http://dui.dooioo.com/public/css/fileupload.css" />
+	<script type="text/javascript" src="http://dui.dooioo.com/public/js/jquery-1.4.2.min.js"></script>
+	<script type="text/javascript" src="http://dui.dooioo.com/public/js/fns.js"></script>
+	<script type="text/javascript" src="/javascripts/jquery-upload-1.0.js"></script>
+
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+	
+	<!-- js_uploadContainer为jquery方法uploadPicture和uploadDocument绑定的容器对象 -->
+	<div class="js_uploadContainer pl_20">
+	 
+		<!-- 存放最终成功传给后台的附件id，多个附件之间用逗号分隔，如"123, 456, 22"，必须有名为js_attachIds的class-->
+		<input type="hidden" name="attachIds" class="js_attachIds">
+		 
+		<!-- 真正的上传控件， 可配置成选择多个文件  必须有名为js_trueUpload的class-->
+		<input type="file" class="js_trueUpload hideit" accept="image/jpeg,application/pdf" multiple>
+		 
+		<!-- 用户交互的控件， 必须有名为js_fakeUpload的class -->
+		<a href="#" class="btnOpH24 h24Silver in_block js_fakeUpload">上传</a>
+		 
+		<!-- 缩略图和进度展示的容器，必须有名为js_attachList的class -->
+		<div class="js_attachList"></div>           
+	</div>
+	
+	<script>
+	//上传文档，没有缩略图，是一个条状的形状，上面显示文件名
+	 $('div.js_uploadContainer').uploadDocument({
+		 uploadUrl: 'http://fs.dooioo.org/store',
+		 streamNameAilas:'file',
+		 attachNameAlias:'originalFileName',
+		 direction:'append',
+		 setParams: function(params){            //设置参数
+			params.domain = 'lianjia';
+		 },
+		 successCallback: function(response, attachView){        //上传成功回调函数，参数为上传成功后， 后端返回的附件信息
+			//$('.js_barContainer').remove();//上传成功后删除进度条，隐藏上传按钮，并且出现删除叉叉  
+			$('.js_fakeUpload').hide();
+		 }, 
+		 deleteCallback: function(data, attachView){
+			//$('.js_attachList').empty();//清空附件列表
+			$('.js_fakeUpload').show();//恢复按钮显示
+			
+			 return true;
+		 }
+	 });
+	</script>
+  </body>
+</html>

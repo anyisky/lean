@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="node_modules/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<!--<ul id="app" >
+			<li v-for="item in list">{{item.message}}</li>
+		</ul>-->
+		<div id="app">
+			<p v-for="item in list">{{item.message}}</p>
+		</div>
+		<script>
+		    var app = new Vue({
+				el:"#app",
+				data:{//这里只是初始化，外部可以改变这边的变量值的
+					list:[
+						{message:'Foo'},
+						{message:'bar'}
+					]
+				}
+			});
+			var arr = app.list;//虽然是改变了arr的值，但是list的值也被改变了 （深复制这个怎么处理？？？）
+			arr.push({message:'third'});
+		</script>
+	</body>
+</html>

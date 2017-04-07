@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= pagaObj.title %></title>
+    <link type="text/css" rel="stylesheet" href="http://dui.dooioo.com/public/css/main.css">
+	<script type="text/javascript" src="http://dui.dooioo.com/public/js/jquery-1.4.2.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+		<% if (item){%>
+		<form enctype="multipart/form-data" action="/postToDetail?id=<%= item.id%>" method="POST">
+		<% }else{%>
+		<form enctype="multipart/form-data" action="/postToDetail" method="POST">
+		<% }%>
+			<table border="0" cellpadding="0" cellspacing="0" class="tableFormNew mt_20">
+				<tr>
+					<td class="tdTitle" width="100">系统名：</td>
+					<td class="request" width="20">●</td>
+					<td width="840">
+						<% if (item){%>
+						<input type="text" class="txtNew" name="sysname" value="<%= item.sysname %>"/>
+						<% }else{%>
+						<input type="text" class="txtNew" name="sysname" />
+						<% }%>
+					</td>
+				</tr>
+				<tr>
+					<td class="tdTitle">文件：</td>
+					<td class="request">●</td>
+					<td>
+						<% if (item){%>
+						<input type="file" class="txtNew tt160" name="file" value="<%= item.path %>" />
+						<% }else{%>
+						<input type="file" class="txtNew tt160" name="file" />
+						<% }%>
+						
+					</td>
+				</tr>
+			</table>
+			
+			<p class="mt_10">
+				<input type="submit" class="btn-small btn-green in_block ml_5" />
+			</p>
+		</form>
+	</div>
+  </body>
+</html>

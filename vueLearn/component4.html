@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="node_modules/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<search-filter-mult :datasource="pdatasource"></search-filter-mult>
+			
+			<div>
+				<div v-for="item in pdatasource.showList">{{item.text}}</div>
+			</div>
+			
+		</div>
+		
+		
+		
+		<script>
+			import * as Constants from './Constants.js';
+			import * as utils from './utils.js';
+			
+			Vue.component('search-filter-mult',{
+				props:['datasource'],
+				template:'<div><dl><dt>{{datasource.title}}</dt><dd><a href="">不限</a><a href="" v-for="item in datasource.items"><label><input type="checkbox" v-bind:value="item" v-model="datasource.selectedItems" />{{item.text}}</label></a></dd></dl></div>'
+				,methods:{
+					changeSelectItem:function(item){
+						
+					}
+				}
+				
+			});
+			
+			let datasource = Constants.SOLROBJ;
+			datasource.selectedItems = [{value:'f1',text:'一室'},{value:'f6',text:'五室以上'}];
+			datasource.showList = [{value:'f1',text:'一室'},{value:'f6',text:'五室以上'}];
+			
+			var app = new Vue({
+				el:"#app",
+				data:{//这里只是初始化，外部可以改变这边的变量值的
+					pdatasource:datasource
+				}
+				
+			});
+			
+			
+			
+			//初始化时，根据url上是否有某个字段，初始化 search-filter-mult 的选中值
+			var filterStr = 'f1f6';
+			
+		</script>
+	</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="node_modules/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<div id="counter-event-example">
+		  	<p>{{ total }}</p>
+		  	<button-counter v-on:tellp="changebyChildTell"></button-counter>
+		  	<button-counter v-on:tellp="changebyChildTell"></button-counter>
+		</div>
+		<script>
+			//v-on:tellp tellp不能用驼峰命名，都得小写
+			Vue.component('button-counter', {
+			  	template: '<button v-on:click="tellp">{{ counter }}</button>',
+			  	data: function () {
+			    	return {
+			      	counter: 0
+			    	}
+			  	},
+			  	methods: {
+			    	tellp: function () {
+			      		this.counter += 1
+			      		this.$emit('tellp')
+			    	}
+			  	},
+			})
+			new Vue({
+			  	el: '#counter-event-example',
+			  	data: {
+			    	total: 0
+			  	},
+			  	methods: {
+			  	  	changebyChildTell: function () {
+			      		this.total += 1
+			    	}
+			  	}
+			})
+			
+		</script>
+	</body>
+</html>

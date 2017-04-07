@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		
+		<script src="https://unpkg.com/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<div id="mylist">
+	        <my-awesome-list :items="items">
+	            <template slot="item" scope="props">
+	                <li class="my-fancy-item">
+	                    {{props.text}}
+	                </li>
+	            </template>
+	        </my-awesome-list>
+	    </div>
+		
+		<script>
+			var child = {
+			    props:["items"],
+			    template:'\
+			        <ul>\
+			           <slot name="item"\
+			                 v-for="item in items"\
+			                 :text="item.text">\
+			           </slot>\
+			        </ul>\
+			    '
+			};
+			
+			new Vue({
+		        el:"#mylist",
+		        data:{
+		            items:[
+		                {text:'这是作用域插槽具有代表性的实例'},
+		                {text:'这是作用域插槽具有代表性的实例2'}
+		            ]
+		        },
+		        components:{
+		            'my-awesome-list':child
+		        }
+    })
+		</script>
+	</body>
+</html>

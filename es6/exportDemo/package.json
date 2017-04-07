@@ -1,0 +1,14 @@
+{
+  "name": "test_babel_8020",
+  "version": "1.0.0",
+  "devDependencies": {
+    "babel-cli": "^6.0.0",
+    "babel-core": "^6.24.0",
+    "babel-loader": "^6.4.1",
+    "babel-polyfill": "^6.23.0",
+    "babel-preset-es2015": "^6.24.0"
+  },
+  "scripts": {
+    "build": "babel js -d lib"
+  }
+}

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		
+		<script src="https://unpkg.com/vue/dist/vue.js"></script>
+		<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+	</head>
+	<body>
+		<div id="app">
+		  	<h1>Hello App!</h1>
+		  	<p>
+		    	<router-link to="/foo">Go to Foo</router-link>
+		    	<router-link to="/bar">Go to Bar</router-link>
+		    	<router-link to="/user/124/profile">Go to 123</router-link>
+		    	<router-link to="/user/hcy/posts">Go to hcy</router-link>
+		  	</p>
+		  
+		  
+		  	<router-view></router-view>
+		</div>
+		
+		<script>
+			const routes = [
+				{
+					path:'/',
+					component:{template:'<div>bar</div>'}
+				},
+				{
+					path:'/foo',
+					component:{template:'<div>foo</div>'}
+				},
+				{
+					path:'/bar',
+					component:{template:'<div>bar</div>'}
+				},
+				{
+					path:'/user/:id',//id的变化不会触发生命周期钩子变化，所以要用watch来监控路由变化
+					component:{template:'<div><div>{{ $route.params.id }}</div><router-view></router-view></div>'},
+					watch:{//没进入这里啊。。。
+						'$route' (to, from) {
+					      	console.log(to);
+					      	console.log(from);
+					    }
+					},
+					children:[
+						{
+							path:'',
+							component:{template:'<div>children home</div>'}
+						},
+						{
+							path:'profile',
+							component:{template:'<div>children profile</div>'}
+						},
+						{
+							path:'posts',
+							component:{template:'<div>children posts</div>'}
+						}
+					]
+				}
+			];
+			
+			const router = new VueRouter({mode: 'history',routes});
+			
+			const app = new Vue({
+				el:'#app',
+				router
+			});
+		</script>
+	</body>
+</html>

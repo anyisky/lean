@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="node_modules/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">{{a}}</div>
+		
+		
+		<script>
+			var data = {a:1};
+			var vm = new Vue({
+				data:data
+				
+			});
+			
+			
+			//document.getElementsByTagName('body')[0].innerHTML = '<div id="app">{{a}}</div>';
+			//相当于适合动态生成的节点，先实例化vue，然后挂载到动态生成的的dom上
+			vm.$mount('#app');
+			
+		</script>
+	</body>
+</html>

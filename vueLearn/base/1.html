@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="node_modules/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<span>{{message}}</span>
+			<span>{{message2}}</span>
+		</div>
+		<script>
+		//el 中的值可以是id的#id 也可以是class的 .class 还可以是dom对象：document.getElementsByTagName('div')[0]
+			var app = new Vue({
+				el:"#app",
+				data:{//这里只是初始化，外部可以改变这边的变量值的
+					message:"hello vue!"
+				}
+			});
+			app.message2 = 'hello hcy';
+			
+			//如果在实例创建之后添加新的属性到实例上，它不会触发视图更新。我们将在后面详细讨论响应系统。
+			//好像会直接报message2 报错
+		</script>
+	</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link type="text/css" rel="stylesheet" href="http://dui.dooioo.com/public/css/main.css">
+		<script src="https://unpkg.com/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<div id="table">
+			<form id="search">
+			    Search <input name="query" v-model="searchQuery">
+			  </form>
+			  <table-com :data="tableData" :columns="tableColumns" :filter-key="searchQuery"></table-com>
+		</div>
+		
+		<script type="text/x-template" id="grid-template">
+			<table cellpadding="0" cellspacing="0" border="0" width="100%" class="tableListNew mt_5">
+				<tr class="trHead">
+					<td v-for="key in columns" v-on:click="sortBy(key)">{{key}}<span>{{sortOrders[key] > 0 ? '↑' : '↓'}}</span></td>
+				</tr>
+				<tbody>
+					<tr v-for="entry in filteredData">
+						<td v-for="key in columns">{{entry[key]}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</script>
+		
+		<script>
+			const componentTable = {
+				template:'#grid-template',
+				props: {
+					data:Array,
+					columns:Array,
+					filterKey: String
+				},
+				data: function(){
+					let sortOrders = {};
+					
+					this.columns.forEach(function(key){
+						sortOrders[key] = 1;//默认的每个字段排序规则
+					});
+					return {
+						sortKey : '',
+						sortOrders : sortOrders
+					};
+				},
+				computed:{
+					filteredData:function(){
+						//marked是marked库中的方法，解析文本值成对应的html
+						let sortKey = this.sortKey;
+						let filterKey = this.filterKey;
+						let order = this.sortOrders[sortKey] || 1;
+						let data = this.data;//不会受影响
+						
+						
+						if(filterKey){
+							data = data.filter(function(row){
+								return Object.keys(row).some(key => (String(row[key]).toLowerCase().indexOf(filterKey) > -1))
+							})
+						}
+						
+						if(sortKey){
+							data = data.slice().sort(function(a,b){
+								a = a[sortKey];
+								b = b[sortKey];
+								return (a === b ? 0 : a > b ? 1 : -1) * order;
+							})
+						}
+						
+						return data;
+					}
+				},
+				filters: {
+					capitalize: function (str) {
+				      	return str.charAt(0).toUpperCase() + str.slice(1)
+				    }
+				},
+				methods: {
+					sortBy : function(key){
+						this.sortKey = key;
+						this.sortOrders[key] = this.sortOrders[key] * -1;
+					}
+				}
+			};
+			
+			const app = new Vue({
+				el:"#table",
+				data:{
+					searchQuery: '',
+					tableColumns: ['name','power'],
+					tableData: [
+						{name:'Chuck Norris',power: Infinity},
+						{name:'Bruce Lee',power: 9000},
+						{name:'Jackie Chan',power: 7000},
+						{name:'Jet Li',power: 8000}
+					]
+				},
+				components:{
+					'table-com' : componentTable
+				}
+				
+				
+			});
+		</script>
+	</body>
+</html>

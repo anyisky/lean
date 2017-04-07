@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="node_modules/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<div>{{message | filterA}}</div>
+			<div>{{message | filterA | filterB(10) }}</div>
+			<div>{{message | filterC(2,3)}}</div>
+		</div>
+		<script>
+			var app = new Vue({
+				el:"#app",
+				data:{//这里只是初始化，外部可以改变这边的变量值的
+					message:"hello vue!"
+				},
+				filters:{
+					filterA:function(value){
+						if(!value){return '';}
+						
+						value = value + '我是filterA';
+						return value;
+					},
+					filterB:function(value,rule1){
+						if(!value){return '';}
+						
+						value = rule1 > 9 ? (value + '我是filterB') : (rule1 + '我是filterB');
+						return value;
+					},
+					filterC:function(value,rule1,rule2){
+						if(!value){return '';}
+						
+						value = rule1 > rule2 ? (rule1 + '我是filterC') : (rule2 + '我是filterC');
+						return value;
+					}
+				}
+			});
+			
+			Vue.filter('test-filter',function(value){
+				return value + '我是全局filter';
+			});
+			
+			console.log(Vue.filter('test-filter')('sss'));
+		</script>
+	</body>
+</html>

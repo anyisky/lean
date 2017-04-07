@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta content="fullscreen=yes,preventMove=yes" name="ML-Config">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="yes" name="apple-touch-fullscreen">
+		<meta content="telephone=no,email=no" name="format-detection">
+		<script src="https://unpkg.com/vue/dist/vue.js"></script>
+		<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+		<link rel="stylesheet" href="jiaoyi.css" />
+	</head>
+	<body>
+		<div id="app">
+			<header class="clear">
+				<div class="wrap">
+					<a href="javascript:;" class="go-back" @click="goback()" title="后退">后退</a>
+					<div class="page-title">成交宝</div>
+					
+					<div class="operation">
+						<router-link to="/xiangou" v-show="showCancel">取消</router-link>
+					</div>
+				</div>
+			</header>
+						
+			<router-view></router-view>
+		</div>
+		
+		<!--成交宝首页：导航-->
+		<script type="text/x-template" id="navigation-template">
+		<div class="nav-wrap">
+			<router-link to="/xiangou" class="nav-btn">限购查询</router-link>
+			<router-link to="/shuifei" class="nav-btn">税费计算器</router-link>
+			<router-link to="/daikuan" class="nav-btn">贷未计算器</router-link>
+		</div>
+		</script>
+
+		<!--限购查询:首页-->
+		<script type="text/x-template" id="xiangou-homepage-template">
+		<div>
+			<h1>限购查询</h1>
+			<div>限购查询的说明，说明限购查询的说明，说明限购查询的说明，说明限购查询的说明，说明</div>
+			<router-link to="/xiangou/radio/1" class="nav-btn">开始查询</router-link>
+		</div>
+		</script>
+
+		<!--限购查询：单选题-->
+		<script type="text/x-template" id="question-radio-template">
+		<div>
+			题型：{{ question.optionType }}
+			<p>第 {{ index }} 题</p>
+			<h1>{{ question.description }}</h1>
+			
+			<p v-for="option in question.options" @click="selectedEvt(option)" class="nav-btn">
+			{{ option.text }}
+			</p>
+			
+			
+			<div v-html="question.tips"></div>
+		</div>
+		</script>
+		<!--限购查询：输入数字题-->
+		<script type="text/x-template" id="question-input-template">
+		<div>
+			题型：{{ question.optionType }}
+			<p>第 {{ index }} 题</p>
+			<template v-for="(value, key) in question.description">
+				<h1>{{ value }}</h1>
+				<p><input type="text" v-model="keymodel"></p>
+			</template>
+			
+			<div v-html="question.tips"></div>
+		</div>
+		</script>
+
+		<!--限购查询:结果页-->
+		<script type="text/x-template" id="xiangou-result-template">
+		<div>
+			<h1>查询结果</h1>
+			<div v-if="result($route.params.qid)==0">
+				很遗憾您己被限购！
+			</div>
+			<div v-if="result($route.params.qid)>0">
+				恭喜您，在沪还有{{ result($route.params.qid) }}套购房资格！
+			</div>
+			<router-link to="/xiangou" class="nav-btn">再次查询</router-link>
+			<div>
+				<p>注意：一二手买卖合同及动迁协议均可能影响查询结果！</p>
+				<p>您选择的条件：</p>
+				<ul>
+					<li v-for="(answer, question) in answeredQeustions">{{question}}{{answer}}</li>
+				</ul>
+			</div>
+		</div>
+		</script>
+		
+		
+		<script src="bus.js"></script>
+		<script src="jiaoyi_com.js"></script>
+		<script src="jiaoyi_router.js"></script>
+		<script src="jiaoyi.js"></script>
+	</body>
+</html>

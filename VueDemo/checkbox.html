@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="https://unpkg.com/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<p>普通数组</p>
+		<br>
+		<div id="customArr">
+			<p>
+				<label><input type="checkbox" value="all" v-model="selectAll" v-on:click="clickSelectAll" />全选/全不选</label>
+			</p>
+
+			
+			<ul>
+				<li v-for="item in items"><label><input type="checkbox" v-bind:value="item" v-model="selectedList" v-on:click="clickChk" />{{item}}</label></li>
+			</ul>
+			{{items}}
+			{{selectedList}}
+		</div>
+		<br>
+		<br>
+		<br>
+		<br>
+		
+		<p>对象数组</p>
+		<br>
+		<div id="objArr">
+			<p>
+				<label><input type="checkbox" value="all" v-model="selectAll" v-on:click="clickSelectAll" />全选/全不选</label>
+			</p>
+
+			
+			<ul>
+				<li v-for="item in items"><label><input type="checkbox" v-bind:value="item" v-model="selectedList" v-on:click="clickChk" />{{item.value}}</label></li>
+			</ul>
+			
+			{{selectedList}}
+		</div>
+		
+		<script>
+			var customArr = new Vue({
+				el:"#customArr",
+				data:{
+					selectAll:false,
+					items:['语文','数学','英语','物理','化学','生物'],
+					selectedList:[]
+				},
+				methods:{
+					'clickSelectAll':function(){
+						this.selectedList = this.selectAll ? this.items : [];
+					},
+					'clickChk':function(){
+						this.selectAll = this.selectedList.length === this.items.length;
+					}
+				}
+			});
+			
+			
+			var objArr = new Vue({
+				el:"#objArr",
+				data:{
+					selectAll:false,
+					items:[
+						{text:'语文',value:'yuwen'},
+						{text:'数学',value:'shuxue'},
+						{text:'英语',value:'yingyu'},
+						{text:'物理',value:'wuli'},
+						{text:'化学',value:'huaxue'},
+						{text:'生物',value:'shengwu'},
+					],
+					selectedList:[]
+				},
+				methods:{
+					'clickSelectAll':function(){
+						this.selectedList = this.selectAll ? this.items : [];
+					},
+					'clickChk':function(){
+						this.selectAll = this.selectedList.length === this.items.length;
+					}
+				}
+			});
+			
+		</script>
+	</body>
+</html>

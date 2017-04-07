@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<link rel="stylesheet" href="http://sh.lianjia.com/public/css/common.css">
+	<link rel="stylesheet" href="http://cdn7.dooioo.com/static/css/ershoufang/detail.css">
+	<style>
+	polygon.hoverable{
+		fill: transparent;
+		stroke:transparent; 
+		stroke-width: 4;
+		cursor: pointer;
+	}
+
+	polygon.hoverable:hover{
+		stroke:#00ae66;   
+	}
+	polygon.current{
+		stroke:#00ae66;   
+	}
+	.infolist li{padding:5px 20px;}
+	</style>
+</head>
+<body>
+	
+	
+	<div class="content-wrapper huxing" id="huxing">
+		<div class="hx_header">
+			<div class="title">户型分间</div>
+			<div class="des" id="huxingAgent">
+				
+			</div>
+		</div>
+		<div class="container">
+			<div class="hx_pic" id="imagebox">
+				<!-- <a href="" target="_blank" class="icon_zoomin" title="查看大图"></a>
+				 --><img id="img_huxing" src="" usemap="#Map">
+				<map name="Map" id="Map"></map>
+				
+				<!-- svg 标签不能用append 而ie直接用html()又不支持，所以用一个层包着 -->
+				<div id="svgAppend"></div>
+				
+			</div>
+			<div class="hx_detail" id="huxingfenjian">
+				<!-- <div class="hx_list_noData">分间信息收集中</div> -->
+				<ul class="infolist js_infolist">
+				
+				</ul>
+			</div>
+		</div>
+	</div>
+	<script src="js/mockData/9.js"></script>
+	<script src="http://sh.lianjia.com/public/js/jquery/jquery.min.js"></script>
+	<script src="js/map.js"></script>
+	<script>
+		var pageNo = 9;
+		$('#img_huxing').attr('src','images/' + pageNo + '.jpg');
+
+		$('#img_huxing').load(function(){
+			dealMap();
+		});
+		
+	</script>
+
+</body>
+</html>

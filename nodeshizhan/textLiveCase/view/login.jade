@@ -1,0 +1,29 @@
+html(lang="en")
+	head
+		meta(charset="utf-8")
+		title basketball live login
+		meta(name="viewport", content="width=device-width, initial-scale=1.0")
+		meta(name="description", content="")
+		link(href="static/css/login.css",rel="stylesheet")
+		script(src="http://192.168.3.41:8001/static/public/vender/jquery/jquery.min.js")
+		script(src="./static/js/socket.io.js")
+	body
+		div.OA_loginContainer.pos_r
+			form.OA_loginForm(action='login?c=login', method='post')
+				div.OA_loginTitle 篮球赛直播登录
+				div.OA_loginContent
+					div.center
+						span.mr_20
+							img(src="static/image/user.png")
+							input.OA_loginTxt(type="text",name="username")
+							
+					div.mt_20.center
+						button.OA_loginBtn(type="submit") 进入
+
+		div.OA_foot.OA_container.mt_15.pos_r
+			div.footerBorder.pos_a
+			span.pos_a.footRights OA / Lianjia.com All Rights Reserved.	
+		
+		script(src="./static/js/main.js")
+		
+		

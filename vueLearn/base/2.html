@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="node_modules/vue/dist/vue.js"></script>
+		<style>
+			.red{
+				color:red;
+			}
+			.classA{
+				color:blue;
+			}
+			.classB{
+				font-style: italic;
+			}
+			.classC{
+				font-size: 20px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<!-- v-bind:name 设置dom的name的值 -->
+			<!-- v-bind:title 设置dom的title的值 -->
+			<!-- v-bind:my-info 设置dom的自定义属性my-info的值 -->
+			<div v-bind:title="message">设置dom的title的值</div>
+			<div v-bind:name="message">设置dom的name的值</div>
+			<div v-bind:my-info="message">设置dom的自定义属性my-info的值 </div>
+			<!-- v-bind:{} 同时设置多个属性 -->
+			<div v-bind="{id:'muid',class:'myclass'}">同时设置多个属性</div>
+			
+			<div :class={red:isRed}>红色字</div>
+			
+			<!-- 这里的classA classB等都是data中的变量，而在data中设置变量时 又是对应的style中对应的class名 不能是直接的style对象 style对象的话 应该用:style来写-->
+			<div :class=[classA,classB]>两个样式</div>
+			<div :class=[classA,{classB:isB,classC:isC}]>条件判断样式</div>
+			
+			<div :style="{fontSize:size + 'px'}">我是30px的字</div>
+			
+			<!-- prop 这个不是很熟 不太了解 -->
+			<div v-bind:text-content.prop="name"></div>
+		</div>
+		
+		<script>
+			var app = new Vue({
+				el:"#app",
+				data:{
+					message:"页面加载时间：" + new Date(),
+					classA:'classA',
+					classB:'classB',
+					classC:'classC',
+					isRed:true,
+					isB:false,
+					isC:true,
+					size:30,
+					name:'ss'
+				}
+			});
+			
+		</script>
+	</body>
+</html>

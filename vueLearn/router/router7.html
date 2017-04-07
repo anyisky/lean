@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+    	<meta name="format-detection" content="telephone=no" />
+		<style type="text/css">
+	    .question {margin:20px; background:pink}
+	    .question .index{color:#999; text-align:center; height:30px; line-height:30px; font-size:12px}
+	    .question .title{color:#333; text-align:center; line-height:160%; font-size:14px; margin:20px;}
+	    .question .options{}
+	    .question .options a,
+	    .question .options a:hover{display:block; height:40px; line-height:40px; border:1px solid red; text-align:center; margin-bottom:10px; border-radius:5px; font-size:14px; color:red; cursor:pointer; text-decoration:none;}
+	    </style>
+		<script src="https://unpkg.com/vue/dist/vue.js"></script>
+		<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+	</head>
+	<body>
+		<div id="container">
+			<p>我是父亲，这里展示父级的相关信息</p>
+			
+			<!-- router view 中展示组件内容 -->
+		  	<router-view :index="currentQindex"></router-view>
+		</div>
+		
+		<script type="text/x-template" id="question-radio-template">
+	  		<div class="question">
+	  			<p class="index">第{{ index }}题</p>
+	  			<p class="title">{{ question.text }}</p>
+	  			<div class="options">
+	  				<a href="javascript:;" class="" v-for="option in question.options" @click="clickEvt(option)">{{ option.text }}</a>
+	  			</div>
+	  			<p>{{ question.description }}</p>
+	  		</div>
+		</script>
+		
+		<script>
+			var bus = new Vue();
+			var q1 = {
+				props:['index'],
+				template: "#question-radio-template",
+				data: function(){
+					return {
+						checkedValue: null,
+						question : {
+							id: "q1",
+							text: "您要购买的在沪住房所在行政区域是？",
+							description: "行政区域问题相关描述信息放在这里，行政区域问题相关描述信息放在这里，行政区域问题相关描述信息放在这里，行政区域问题相关描述信息放在这里",
+							options:[
+								{
+									value: "1",
+									text: "浦东新区",
+									next: "/q2"
+								},
+								{
+									value: "2",
+									text: "除浦东新区外其他区域",
+									next: "/q2"
+								}
+							]
+						}
+					}
+				},
+				methods: {
+					clickEvt: function(option){
+						
+						//this.index += 1;
+						bus.$emit('gonext', this.index + 1);
+						//picked[this.question.id] = option.value;
+						router.push(option.next);
+					}
+				}
+			};
+			
+			var q2 = {
+				props:['index'],
+				template: "#question-radio-template",
+				data: function(){
+					return {
+						checkedValue: null,
+						question : {
+							id: "q2",
+							text: "您是公司买房还是个人买房？",
+							description: "公司买房还是个人买房问题相关描述信息放在这里，公司买房还是个人买房问题相关描述信息放在这里。",
+							options:[
+								{
+									value: "1",
+									text: "浦东新区",
+									next: "/q3"
+								},
+								{
+									value: "2",
+									text: "除浦东新区外其他区域",
+									next: "/q4"
+								}
+							]
+						}
+					}
+				},
+				methods: {
+					clickEvt: function(option){
+						
+						bus.$emit('gonext', this.index + 1);
+						//picked[this.question.id] = option.value;
+						//router.push(option.next);
+					}
+				}
+			};
+		
+			var router = new VueRouter({
+			  	routes: [
+			  		{path:'/', component: q1},
+			  		{ path: '/q1', component: q1 },
+			  		{ path: '/q2', component: q2 }
+				]
+			});
+		
+			var container = new Vue({
+				el: "#container",
+				data: {
+					currentQindex: 1,
+					picked: {
+		
+					}
+				},
+				router: router
+			});
+			
+			bus.$on('gonext',function(index){
+				container.currentQindex = index;
+			});
+		</script>
+	</body>
+</html>

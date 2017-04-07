@@ -1,0 +1,32 @@
+include header
+		div.OA_header
+			div.white
+				span 欢迎 #{user}
+				a.white(href:"javascript:;") 注销
+				
+		block content
+			div.OA_container
+				div.clear.mt_20
+					div.OA_main_content.fr
+						div.OA_nav_tab.clearfix
+							a.on(href="javascript:;") 直播
+							a(href="javascript:;") 图片
+							a(href="javascript:;") 统计
+							
+						div.OA_module.mt_20.pd_20
+							div.live_area
+								ul
+									li
+									
+							textarea.mt_20(cols="95",rows="10")
+							p.ta_r.mt_10
+								button#send_msg.OA_btn_small.OA_btn_green_fill 直播发送
+					
+					div.OA_module.OA_sidebar.fl(style="min-height:200px;")
+						p.fs_14 在线用户
+						ul.online_list.friend_list
+		div.OA_foot.OA_container.mt_15.pos_r
+			div.footerBorder.pos_a
+			span.pos_a.footRights OA / Lianjia.com All Rights Reserved.		
+		script(src="./static/js/main.js")
+include footer

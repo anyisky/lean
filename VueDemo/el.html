@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="https://unpkg.com/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<div id="appId">
+			<span>{{appIdMessage}}</span>
+		
+		</div>
+		
+		<div class="appClass">
+			<span>{{appClassMessage}}</span>
+		</div>
+		
+		<article>
+			<span>{{tagnameMessage}}</span>
+		</article>
+		
+		<div id="dongtai"></div>
+		
+		<script>
+			var idApp = new Vue({
+				el:"#appId",
+				data:{
+					appIdMessage:"hello appIdMessage!"
+				}
+			});
+			
+			var classApp = new Vue({
+				el:".appClass",
+				data:{
+					appClassMessage:"hello appClassMessage!"
+				}
+			});
+			
+			var tagnameApp = new Vue({
+				el:document.getElementsByTagName('article')[0],
+				data:{
+					tagnameMessage:"hello tagnameMessage!"
+				}
+			});
+			
+			//如果目标dom还没生成，实例化在前，就会报错
+			/*var app = new Vue({
+				el:'#app',
+				data:{
+					message:"hello message!"
+				}
+			});*/
+			
+			var app = new Vue({
+				data:{
+					message:"hello message!"
+				}
+			});
+			
+			document.getElementById('dongtai').innerHTML = '<div id="app">{{message}}</div>';
+			
+			app.$mount('#app');
+			//app.$el = '#app';//这个是不行的 要用上面那句动态挂载
+			
+			//直接在console中变更对应的data中的数据，可以直接看到
+			
+			//vue-devtool 安装后，在开发者工具那边可以看到对应的
+		</script>
+	</body>
+</html>

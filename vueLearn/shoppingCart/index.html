@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="node_modules/vue/dist/vue.js"></script>
+		<script src="node_modules/vue-router/dist/vue-router.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<ul>
+				<li>
+					<a href="javascript:;">
+						<img src=""  />
+						<div class="info">
+							
+						</div>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<script>
+			var DataList = [
+				{"text":"JavaScript程序设计","count":10,"id":1},
+				{"text":"HTML程序设计","count":13,"id":2},
+				{"text":"CSS实战","count":1,"id":3}
+			];
+			
+			
+			var app = new Vue({
+				el:"#app",
+				data:{//这里只是初始化，外部可以改变这边的变量值的
+					message:"hello vue!"
+				}
+			});
+			app.message2 = 'hello hcy';
+			
+			
+		</script>
+	</body>
+</html>

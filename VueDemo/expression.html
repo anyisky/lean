@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="https://unpkg.com/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<div id="appId">
+			<p>数字加法：{{number + 2}}</p>
+			<p>三目运算符：{{ok ? 'YES' : 'NO'}}</p>
+			<p>hello vue!该字符串反转：{{message.split('').reverse().join('')}}</p>
+			<p>当前时间转成时间戳：{{Number(new Date())}}</p>
+			
+			<p>-2.7的绝对值：{{Math.abs(-2.7)}}</p>
+		</div>
+		
+		
+		
+		<script>
+			var idApp = new Vue({
+				el:"#appId",
+				data:{
+					number:12,
+					ok:true,
+					message:'hello vue!'
+				}
+			});
+			
+			
+		</script>
+	</body>
+</html>

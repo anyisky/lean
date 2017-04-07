@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="https://unpkg.com/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		
+		<div id="customArr">
+			
+			<p>
+				<label><input type="checkbox" value="all" v-model="selectAll" v-on:click="clickSelectAll" />全选/全不选</label>
+			</p>
+
+			<check-list :items="items">
+				
+			</check-list>
+			
+			<check-list-bro></check-list-bro>
+		</div>
+		<br>
+		<br>
+		<br>
+		<br>
+		
+		
+		<script>
+			const bus = new Vue();
+			
+			const checkList = {
+				props:['items'],
+				data:function(){
+					return {
+						selectedlist:[]
+					};
+				},
+				template:`
+				<ul>
+					<li v-for="item in items"><label><input type="checkbox" v-bind:value="item" v-model="selectedlist" v-on:click="clickChk" />{{item}}</label></li>
+				</ul>
+				`,
+				methods:{
+					'clickChk':function(){
+						bus.$emit('selectItems',this.selectedlist)
+					}
+				}
+			};
+			
+			const checklistresult = {
+				
+				data:function(){
+					return {
+						items:[]
+					}
+				},
+				created:function(){
+					bus.on('selectItems',function(arr){
+						this.items = arr;
+					});
+				},
+				template:`
+				<ul>
+					<li v-for="item in items">我是结果:{{item}}</li>
+				</ul>
+				`
+			};
+			
+			var customArr = new Vue({
+				el:"#customArr",
+				data:{
+					selectAll:false,
+					items:['语文','数学','英语','物理','化学','生物']
+					
+				},
+				methods:{
+					'clickSelectAll':function(){
+						this.items = ['yuwen','shuxue','yingyu','wuli','huaxue','shegnwu']
+					}
+				},
+				components:{
+					'check-list' : checkList,
+					'check-list-bro':checklistresult
+				}
+			});
+			
+			
+			
+			
+		</script>
+	</body>
+</html>

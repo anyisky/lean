@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="node_modules/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<div>
+			  <h1>我是父组件的标题</h1>
+			  <my-awesome-list :items="items">
+			  <!-- 作用域插槽也可以在这里命名 -->
+			  <template slot="item" scope="props">
+			    <li class="my-fancy-item">{{ props.text }}</li>
+			  </template>
+			</my-awesome-list>
+			</div>
+		</div>
+		<script>
+			
+			Vue.component('my-awesome-list',{
+				
+				template:'<div><h2>我是子组件的标题</h2><slot>只有在没有要分发的内容时才会显示。</slot></div>'
+			});
+			
+			var vm = new Vue({
+				el:'#app',
+				data:{
+					pMessage:124
+				}
+			});
+			
+		</script>
+	</body>
+</html>

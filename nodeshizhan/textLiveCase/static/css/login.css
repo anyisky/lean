@@ -1,0 +1,37 @@
+* {margin: 0;padding: 0;}
+table {border-collapse: collapse;border-spacing: 0;width:100%;}
+h1,h2,h3,h4,h5,h6 {font-size: 100%}
+ul,ol,li {list-style: none;}
+em,i {font-style: normal;}
+img {border: 0;}
+input,img {vertical-align: middle;}
+a {text-decoration: none;}
+html,body {font-family:Arial,"Hiragino Sans GB","Microsoft Yahei UI","Microsoft Yahei","微软雅黑",'Segoe UI',Tahoma,"宋体b8b\4f53",SimSun,sans-serif;font-size: 100%;}
+body{font-size: 12px;font-family:Arial,"Hiragino Sans GB","Microsoft Yahei UI","Microsoft Yahei","微软雅黑",'Segoe UI',Tahoma,"宋体b8b\4f53",SimSun,sans-serif;text-rendering: optimizeLegibility;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;}
+textarea.fixAndroidKeyboard:focus,input.fixAKeyboard:focus {-webkit-tap-highlight-color: rgba(255,255,255,0);-webkit-user-modify: read-write-plaintext-only;}
+* {tap-highlight-color: rgba(0,0,0,0);-webkit-tap-highlight-color: rgba(0,0,0,0);-ms-tap-highlight-color: rgba(0,0,0,0);}
+input[type=radio],
+input[type=checkbox] {margin-right:3px;}
+
+html,body{width:100%;height:100%;position:relative}
+.OA_loginContainer{width:100%;height:100%;position:relative;background:url(../image/loginBg.png) center 0 no-repeat;}
+
+.OA_loginTxt{width:226px; height:32px; line-height:32px; border:none; color:#222; padding:0 6px; background-color:#ccc;}
+.OA_loginForm{position:absolute;top:25%;left:50%;width:360px;margin-left:-180px;background:#fff;}
+.OA_loginBtn{min-width: 204px;height: 32px;line-height: 32px;padding: 0 16px;font-size: 14px;text-align: center;cursor: pointer;display: inline-block;text-decoration: none;border: 1px solid #36a765;background-color: #36a765;color: #fff;}
+.OA_loginBtn:hover {background-color:#53b47b;border:1px solid #53b47b;}
+.OA_loginBtn:active {background-color:#2d8e55;border:1px solid #2d8e55;}
+.OA_loginBtn.disabled,.OA_loginBtn.disabled:hover{-webkit-opacity:0.3;-moz-opacity:0.3;-ms-opacity:0.3;opacity:0.3;filter:alpha(opacity=30);background-color:none;cursor:default}
+.OA_loginTitle{font-size: 14px;height: 38px;line-height: 38px;padding-left: 20px;background: #666;color: #fff;}
+.OA_loginContent{width:320px;margin:10px auto 25px auto}
+
+.OA_foot{height:45px;line-height:45px;width:100%;bottom:0;text-align:center;color:#999;}
+
+.pos_r{position:relative;}
+.pos_a{position:absolute;}
+.grey999{color:#999}
+.mr_20{margin-right:20px}
+.mt_20{margin-top:20px;}
+.center{text-align:center}
+.loginErr{color:red;height:20px;line-height:20px;margin-top:5px;visibility: hidden;padding-left:47px;}
+.visibile{visibility: visible;}

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			.fade-enter-active, .fade-leave-active {
+				  transition: opacity .5s
+				}
+				.fade-enter, .fade-leave-active {
+				  opacity: 0
+				}
+		</style>
+		<script src="node_modules/vue/dist/vue.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min.js"></script>
+	</head>
+	<body>
+		<div id="app">
+		  <anchored-heading :level="{type:3,required:true}">
+		  	<slot>我是test</slot>
+		  	
+		  </anchored-heading>
+		</div>
+		
+		<script>
+			var getChildrenTextContent = function (children) {
+			  return children.map(function (node) {
+			    return node.children ? getChildrenTextContent(node.children) : node.text;
+			  }).join('')
+			};
+			
+			Vue.component('anchored-heading', {
+			  	render: function (createElement) {
+				    // create kebabCase id
+				    var headingId = getChildrenTextContent(this.$slots.default)
+				      .toLowerCase()
+				      .replace(/\W+/g, '-')
+				      .replace(/(^\-|\-$)/g, '');
+				      
+				    return createElement(
+				      'h' + this.level,
+				      [
+				        createElement('a', {
+				          attrs: {
+				            name: headingId,
+				            href: '#' + headingId
+				          }
+				        }, this.$slots.default)
+				      ]
+				    );
+			  	},
+			  	props: {
+				    level: {
+				      type: Number,
+				      required: true
+				    }
+			  	}
+			});
+			new Vue({
+				el:'#app'
+			})
+		</script>
+	</body>
+</html>

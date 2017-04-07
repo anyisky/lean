@@ -1,0 +1,73 @@
+@import 'reset';
+
+$lj-green-color: #00ae66;
+
+@mixin border-radius($radius){
+	-webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+.pubmessage{
+	border: 1px solid #ccc;
+    padding: 10px;
+    color: #333;
+}
+.message-green {
+	@extend .pubmessage;
+	border-color:green;
+}
+.message-red {
+	@extend .pubmessage;
+	border-color:red;
+}
+.message-grey {
+	@extend .pubmessage;
+	border-color:grey;
+}
+.title {
+	color:$lj-green-color;
+	background-color: red;
+	@include border-radius(10px);
+	width:400px;
+	height: 50px;
+}
+
+.tagbg {
+	background-color: $lj-green-color;
+	@include border-radius(5px);
+	width:200px;
+	height: 50px;
+}
+
+nav {
+	ul {
+		margin:0;
+		padding:0;
+		list-style: none;
+		background: #fff;
+	}
+	
+	ul:after{
+		content:'.';
+		clear:both;
+		display:block;
+		height:0;
+		visibility:hidden;
+		font-size:0;
+		line-height:0;
+	}
+	
+	li {
+		float: left;
+		width:150px;
+	}
+	
+	a {
+		display: block;
+		padding:5px;
+		color: $lj-green-color;
+		text-decoration: none;
+	}
+}

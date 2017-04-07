@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		
+		<script src="https://unpkg.com/vue/dist/vue.js"></script>
+		<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+	</head>
+	<body>
+		<div id="app">
+		  	<ul>
+				<li><router-link to="/foo">foo</router-link></li>
+				<li><router-link to="/bar">bar</router-link></li>
+			</ul>
+			
+			<router-view></router-view>
+		</div>
+		
+		<script>
+			const articleComponent = {
+				template:`
+				 	<div class="post">
+					    <div class="loading" v-if="loading">
+					      Loading...
+					    </div>
+				
+					    <div v-if="error" class="error">
+					
+					    </div>
+				
+					    <div v-if="post" class="content">
+					      	<h2>XXX</h2>
+					      	<p>nihao</p>
+					    </div>
+				  	</div>
+				`,
+				data () {
+					return {
+						loading: false,
+				      	post: null,
+				      	error: null
+					}
+				},
+				created () {
+			    	// 组件创建完后获取数据，
+			    	// 此时 data 已经被 observed 了
+			    	this.fetchData()
+			  	},
+			  	watch: {
+				    // 如果路由有变化，会再次执行该方法
+				    '$route': 'fetchData'
+				},
+				methods: {
+				    fetchData () {
+				    	console.log(111);
+				      this.error = this.post = null;
+				      this.loading = true;
+				      
+				      // replace getPost with your data fetching util / API wrapper
+				      window.setTimeout(function(){
+				      	let err = '';
+				      	let post = {id:1,text:1}; 
+				      	
+				      	this.loading = false;//没有对应的变更组件里的html是神马鬼
+				      	console.log(this.loading);
+				        if (err) {
+				          this.error = err.toString();
+				        } else {
+				          this.post = post;
+				        }
+				      },200);
+				      
+				      
+				    }
+  				}
+			};
+			
+			const Bar = { template: '<div class="bar">bar</div>'};
+			
+			const router = new VueRouter({
+				routes:[
+					{ path: '/', component: articleComponent},
+					{ path: '/foo', component: articleComponent},
+					{ path: '/bar', component: Bar}
+				]
+			});
+			
+			const app = new Vue({
+				el:'#app',
+				router
+			})
+		</script>
+	</body>
+</html>

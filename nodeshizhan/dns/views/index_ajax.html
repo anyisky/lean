@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>DNS查询工具</title>
+	<script src="http://192.168.3.41:8001/static/public/vender/jquery/jquery.min.js"></script>
+</head>
+<body>
+	<h1>DNS查询工具</h1>
+	<P>
+		查询DNS：<input type="text" name="dns" id="dns" /> <input type="button" value="查询" id="submit" />
+	</P>
+	<p>
+		Domain:<span style="red" id="domain"></span>
+	</p>
+	<p>
+		IP:<span style="red" id="ip"></span>
+	</p>
+	
+	<script>
+		$('#submit').click(function(){
+			$.ajax({
+				url:'/parse',
+				type:'POST',
+				dataType:'json',
+				data:"searchDns="+$('#dns').val(),
+				success:function(response){
+					if(response.status == 'ok'){
+						$('#domain').text(response.data.domain);
+						$('#ip').text(response.data.ip);
+					}
+				}
+			});
+		});
+	</script>
+</body>
+</html>

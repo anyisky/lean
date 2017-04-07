@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<link rel="stylesheet" href="http://sh.lianjia.com/public/css/common.css">
+	<link rel="stylesheet" href="http://cdn7.dooioo.com/static/css/ershoufang/detail.css">
+</head>
+<body>
+	
+	
+	<div class="content-wrapper huxing" id="huxing">
+		<p>
+			<a href="javascript:;" id="next">下一张</a><span id="pageNoValue"></span>
+		</p>
+	
+		<div class="hx_header">
+			<div class="title">户型分间</div>
+			<div class="des" id="huxingAgent">
+				
+			</div>
+		</div>
+		<div class="container">
+			<div class="hx_pic" id="imagebox">
+				<!-- <a href="" target="_blank" class="icon_zoomin" title="查看大图"></a>
+				 --><img id="img_huxing" src="" usemap="#Map">
+				<map name="Map" id="Map"></map>
+				
+				
+				<!-- <svg id="svgBox" width="100%" height="100%" version="1.1" xmlns="http://www.w3.org/2000/svg" style="position:absolute;top:0">
+				
+				</svg> -->
+				
+				<svg id="svgBox" width="100%" height="100%" version="1.1" xmlns="http://www.w3.org/2000/svg" style="position:absolute;top:0;left:0">
+				
+				<polygon points="67.85249999999999,139.02499999999998,144.21249999999998,139.02499999999998,181.14749999999998,139.02499999999998,181.14749999999998,256.46999999999997,67.85249999999999,256.46999999999997,67.85249999999999,139.02499999999998" fill="transparent" stroke="#00ae66" stroke-width="4"></polygon><polygon points="144.21249999999998,89.0175,144.21249999999998,139.02499999999998,67.85249999999999,139.02499999999998,67.85249999999999,89.0175,144.21249999999998,89.0175" fill="transparent" stroke="#00ae66" stroke-width="4"></polygon><polygon points="181.14749999999998,256.46999999999997,303.78,256.46999999999997,303.78,304.8175,181.14749999999998,304.8175,181.14749999999998,256.46999999999997" fill="transparent" stroke="#00ae66" stroke-width="4"></polygon><polygon points="450.48249999999996,89.0175,416.65999999999997,89.0175,339.67749999999995,89.0175,303.78,89.0175,303.78,39.217499999999994,450.48249999999996,39.217499999999994,450.48249999999996,89.0175" fill="transparent" stroke="#00ae66" stroke-width="4"></polygon><polygon points="416.65999999999997,139.02499999999998,416.65999999999997,122.21749999999999,416.65999999999997,89.0175,450.48249999999996,89.0175,450.48249999999996,139.02499999999998,416.65999999999997,139.02499999999998" fill="transparent" stroke="#00ae66" stroke-width="4"></polygon><polygon points="416.65999999999997,122.21749999999999,339.67749999999995,122.21749999999999,339.67749999999995,89.0175,303.78,89.0175,303.78,139.02499999999998,303.78,256.46999999999997,416.65999999999997,256.46999999999997,416.65999999999997,139.02499999999998,416.65999999999997,122.21749999999999" fill="transparent" stroke="#00ae66" stroke-width="4"></polygon><polygon points="416.65999999999997,122.21749999999999,339.67749999999995,122.21749999999999,339.67749999999995,89.0175,416.65999999999997,89.0175,416.65999999999997,122.21749999999999" fill="transparent" stroke="#00ae66" stroke-width="4"></polygon><polygon points="181.14749999999998,139.02499999999998,303.78,139.02499999999998,303.78,89.0175,303.78,39.217499999999994,175.33749999999998,39.217499999999994,175.33749999999998,89.0175,144.21249999999998,89.0175,144.21249999999998,139.02499999999998,181.14749999999998,139.02499999999998" fill="transparent" stroke="#00ae66" stroke-width="4"></polygon><polygon points="181.14749999999998,139.02499999999998,303.78,139.02499999999998,303.78,256.46999999999997,181.14749999999998,256.46999999999997,181.14749999999998,139.02499999999998" fill="transparent" stroke="#00ae66" stroke-width="4"></polygon></svg>
+				
+			</div>
+			<div class="hx_detail" id="huxingfenjian">
+				<div class="hx_list_noData">分间信息收集中</div>
+			</div>
+		</div>
+	</div>
+	
+	<script src="js/d3.min.js"></script>
+	<script src="js/data.js"></script>
+	<script src="http://sh.lianjia.com/public/js/jquery/jquery.min.js"></script>
+		<script src="js/map.js"></script>
+	<script>
+		
+	
+		var pageNo = 1;
+		$('#img_huxing').attr('src','images/' + pageNo + '.jpg');
+		$('#pageNoValue').text('当前第'+pageNo+'张图片');
+		
+		$('#next').click(function(){
+			if(pageNo == 10){
+				pageNo = 1;
+			}else{
+				pageNo++;
+			}
+			$('#img_huxing').attr('src','images/' + pageNo + '.jpg');
+			$('#pageNoValue').text('当前第'+pageNo+'张图片');
+		});
+		
+		$('#img_huxing').load(function(){
+			//dealMap();
+		});
+		
+	</script>
+
+</body>
+</html>

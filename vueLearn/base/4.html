@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="https://unpkg.com/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<p>{{message}}</p>
+			<button v-on:click="reverseMessage">反转message字符串</button>
+			
+			<p><input type="text" v-model="message" /></p>
+			
+			<p><span>trim的字符串长度：{{trim.length}}</span></p>
+			<p><input type="text" v-model="trim" /></p>
+			
+			<p><span>trim2的字符串长度（加修饰符trim的）：{{trim2.length}}</span></p>
+			<p><input type="text" v-model.trim="trim2" /></p>
+			
+			<p><span>加修饰符lazy的字段：{{lazy}}</span></p>
+			<p><input type="text" v-model.lazy="lazy" /></p>
+			
+			<p><span>{{number}}</span></p>
+			<p>设定只能输入数字：<input type="number" v-model.number="number" /></p>
+		</div>
+		<script>
+			var app = new Vue({
+				el:"#app",
+				data:{//这里只是初始化，外部可以改变这边的变量值的
+					message:'hello vue.js!',
+					number:123,
+					trim:'',
+					trim2:'   xxx   ',
+					lazy:''
+				},
+				methods:{
+					reverseMessage:function(){
+						this.message = this.message.split('').reverse().join('');
+					}
+				}
+			});
+			
+			//处理用户输入
+		</script>
+	</body>
+</html>

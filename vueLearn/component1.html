@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="node_modules/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<!-- 感觉这个就类似于ng的scope绑定 和attr绑定的差别 -->
+			<!-- 字面量 -->
+			<child message="hello"></child>
+			
+			<!-- 传递实际的值 -->
+			<child :message="pMessage"></child>
+		</div>
+		<script>
+			
+			Vue.component('child',{
+				props:['message'],
+				template:'<div><div v-for="item in message.items">{{item.text}}</div></div>'
+			});
+			
+			var vm = new Vue({
+				el:'#app',
+				data:{
+					pMessage:{
+						title:'户型',
+						items:[
+							{value:'f1',text:'一室'},
+							{value:'f2',text:'二室'},
+							{value:'f3',text:'三室'},
+							{value:'f4',text:'四室'},
+							{value:'f5',text:'五室'},
+							{value:'f6',text:'五室以上'}
+						]
+						,selectedItems:[]
+					}
+				}
+			});
+			
+		</script>
+	</body>
+</html>

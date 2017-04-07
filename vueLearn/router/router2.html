@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		
+		<script src="https://unpkg.com/vue/dist/vue.js"></script>
+		<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+	</head>
+	<body>
+		<div id="app">
+		  	<h1>Hello App!</h1>
+		  	<p>
+		    	<router-view class="view one"></router-view>
+				<router-view class="view two" name="a"></router-view>
+				<router-view class="view three" name="b"></router-view>
+		  	</p>
+		
+		</div>
+		
+		<script>
+			
+			
+			const router = new VueRouter({
+				routes: [
+				    {
+				      	path: '/',
+				      	components: {
+				        	default: {template:'<div>foo</div>'},
+				        	a: {template:'<div>Bar</div>'},
+				        	b: {template:'<div>Baz</div>'}
+				      	}
+				    }
+			  	]
+			});
+			
+			const app = new Vue({
+				el:'#app',
+				router
+			});
+		</script>
+	</body>
+</html>

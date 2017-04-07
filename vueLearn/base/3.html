@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="node_modules/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<span v-if="seen">Now you see me</span>
+			<div v-text="msg"></div>
+			<div>{{msg}}</div>
+			
+			<div v-html="html"></div>
+			
+			<!-- v-html好像不同于三个花括号 -->
+			<!--<div>{{{html}}}</div>-->
+		</div>
+		<script>
+			var app = new Vue({
+				el:"#app",
+				data:{//这里只是初始化，外部可以改变这边的变量值的
+					seen:true,
+					msg:'同双花括号的效果绑定数据',
+					html:'<span style="color:red">渲染html</span>'
+				}
+			});
+		</script>
+	</body>
+</html>

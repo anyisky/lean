@@ -1,0 +1,28 @@
+var item = [{id:'rtx',text:'rtx'},{id:'mail',text:'mail'},{id:'phone',text:'phone'},{}];
+var item2 = ["德佑独家","满五年","拍卖房","钥匙房","随到随看"];
+function buildLabels(value,itemArr){
+	
+	value = Number(value);
+
+	if(isNaN(value)){
+		return false;
+	}
+
+	var arr = [],
+		transArr = [],
+		len = itemArr.length;
+
+	for(var i = 0; i <= len;i++){
+		arr.push(value>>i&1);
+	}
+
+	arr.forEach(function(item,idx){
+		if(item === 1){
+			transArr.push(itemArr[idx]);
+		}
+	});
+	
+	return transArr;
+};
+
+console.log(buildLabels(4,item));

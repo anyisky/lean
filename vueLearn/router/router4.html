@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		
+		<script src="https://unpkg.com/vue/dist/vue.js"></script>
+		<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+	</head>
+	<body>
+		<div id="app">
+		  	<h1>Hello App!</h1>
+		  	<p>
+		    	<router-link to="/foo">Go to Foo</router-link>
+		    	<router-link to="/bar">Go to Bar</router-link>
+		  	</p>
+		
+			<router-view></router-view>
+		</div>
+		
+		<script>
+			
+			
+			const router = new VueRouter({
+				routes: [
+					{
+						path:'/foo',
+						component:{template:'<div>foo</div>'}
+					},
+					{
+						path:'/bar',
+						component:{template:'<div>bar</div>'}
+					}
+			  	]
+			});
+			
+			//如果有这个，用before这个钩子的话，不手动next方法，是不会改变url的，但after这个钩子就不会阻止url的变化
+			//使用before的钩子，就要确保要调用 next 方法，否则钩子就不会被 resolved。
+			/*router.beforeEach((to,from,next) => {
+				console.log(to);
+			});
+			*/
+			const app = new Vue({
+				el:'#app',
+				router
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="https://unpkg.com/vue/dist/vue.js"></script>
+		
+	</head>
+	<body>
+		<div id="app">
+			
+			<test-slot>
+				<p slot="radio">
+					<label><input type="radio" name="area" value="branch" v-model="selectitem" v-on:click="getList" />我行</label>
+					<label><input type="radio" name="area" value="area" v-model="selectitem" v-on:click="getList" />我区</label>
+					<label><input type="radio" name="area" value="myself" v-model="selectitem" v-on:click="getList" />我自己</label>
+				</p>
+				
+				<p slot="nodata">暂无数据</p><!-- 没有数据时展现这句 -->
+			</test-slot>
+			<br>
+			
+
+		</div>
+		<script>
+			var data = {
+				'branch':['分行A组','分行B组'],
+				'area':['大东区','大西区'],
+				'myself':['黄春燕']
+			};
+			
+			
+			Vue.component('test-slot',{
+				template:'<div>\
+							<slot name="radio"></slot>\
+							<ul>\
+								<li v-for="item in list"><a href="">{{item}}</a></li>\
+							</ul>\
+							<slot name="nodata" v-if="list.length == 0"></slot>\
+						</div>',
+				data:function(){
+					return {
+						selectitem:'',
+						list:[]
+					}
+				},
+				methods:{
+					getList:function(){
+						this.list = data[this.selectitem];
+					}
+				}
+			});
+			
+			
+			
+			var app = new Vue({
+				el:"#app"
+			});
+			
+		
+			
+		</script>
+	</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	
+</head>
+<body>
+	Socket 测试
+	有两点要注意的：socket.io.js路径要写对，这个js文件实际放在了服务器端的node_modules文件夹中，在请求这个文件时会重定向，因此不要诧异服务器端不存在这个文件但为什么还能正常工作。当然，你可以把服务器端的socket.io.js这个文件拷贝到本地，使它成为客户端的js文件，这样就不用每次都向Node服务器请求这个js文件，增强稳定性。
+	
+	<h1>socket.io.js放到本地的话 需要修改很多路径，挺麻烦的~</h1>
+	<script src="/socket.io/socket.io.js"></script>
+		<!-- <script src="socket.io.js"></script> -->
+	
+	<script>
+	  var socket = io('http://localhost:7070');
+	  socket.on('news', function (data) {
+		console.log(data);
+		socket.emit('my other event', { my: 'data' });
+	  });
+	</script>
+	
+</body>
+</html>

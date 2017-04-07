@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta content="fullscreen=yes,preventMove=yes" name="ML-Config">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="yes" name="apple-touch-fullscreen">
+		<meta content="telephone=no,email=no" name="format-detection">
+		<script src="https://unpkg.com/vue/dist/vue.js"></script>
+		<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+		<style type="text/css">
+		body {
+			padding:0;
+			margin:0;
+		}
+		body,
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6,
+		html{font-size:100%}
+
+		.clear,
+		.clear:after{display:block}
+		
+		header { display:fixed; top:0; left:0; }
+		header .wrap{
+			display:flex;
+			height:40px; 
+			line-height:40px; 
+			background:#333; 
+			color:#fff;
+		}
+		header .wrap .page-title{
+			flex:1;
+			font-size:1.4rem;
+			color:#fff;
+			padding-left:1rem;
+		}
+		header .wrap a.go-back,
+		header .wrap a.go-back:hover{
+			width:60px;
+			height:40px;
+			text-align:center;
+			background:green;
+			color:#fff;
+			display:inline-block;
+			text-decoration:none;
+		}
+		header .wrap .operation{
+			width:60px;
+			text-align:right;
+		}
+		header .wrap .operation a,
+		header .wrap .operation a:hover{
+			display:inline-block;
+			width:60px;
+			background:green;
+			text-decoration:none;
+			color:#fff;
+			text-align:center;
+		}
+		.nav-wrap {
+			margin-top:100px;
+		}
+		a.nav-btn,
+		a.nav-btn:hover {
+			margin:0 auto;
+			display:block;
+			width:80%;
+			height:60px;
+			line-height:60px;
+			border:1px solid #333;
+			text-align: center;
+			font-size:2rem;
+			color:#333;
+			margin-bottom:20px;
+			text-decoration:none;
+		}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<my-header :show-cancel="showCancel"></my-header>
+
+			<router-view></router-view>
+		</div>
+		
+
+
+		<!--模板-->
+		<!--公共头部-->
+		<script type="text/x-template" id="header-template">
+		<header class="clear">
+			<div class="wrap">
+				<a href="javascript:;" class="go-back" @click="goback()" title="后退">后退</a>
+				<div class="page-title">
+					成交宝
+				</div>
+				<div class="operation">
+					<router-link to="/xiangou" v-show="showCancel">取消</router-link>
+				</div>
+			</div>
+		</header>
+		</script>
+
+		<!--成交宝首页：导航-->
+		<script type="text/x-template" id="navigation-template">
+		<div class="nav-wrap">
+				<router-link to="/xiangou" class="nav-btn">限购查询</router-link>
+				<router-link to="/shuifei" class="nav-btn">税费计算器</router-link>
+				<router-link to="/daikuan" class="nav-btn">贷未计算器</router-link>
+			</div>
+		</script>
+
+		<!--限购查询:首页-->
+		<script type="text/x-template" id="xiangou-homepage-template">
+		<div>
+			<h1>限购查询</h1>
+			<div>限购查询的说明，说明限购查询的说明，说明限购查询的说明，说明限购查询的说明，说明</div>
+			<router-link to="/xiangou/question/1" class="nav-btn">开始查询</router-link>
+		</div>
+		</script>
+
+		<!--限购查询：单选题-->
+		<script type="text/x-template" id="question-radio-template">
+		<div>
+			单选题型
+			<p>第 1 题</p>
+			<h1>你要在哪里买房？</h1>
+			<a href="/xiaogou/2">浦东</a>
+			<a href="/xiaogou/3">浦西</a>
+			<div>
+				<p>1. 说明1的内容。</p>
+				<p>2. 说明2的内容内容内容内容内容内容内容内容内容内容内容。</p>
+			</div>
+		</div>
+		</script>
+		<!--限购查询：单选题-->
+		<script type="text/x-template" id="question-input-template">
+		<div>
+			输入数字题型
+			<p>第 1 题</p>
+			<h1>你要在哪里买房？</h1>
+			<a href="/xiaogou/2">浦东</a>
+			<a href="/xiaogou/3">浦西</a>
+			<div>
+				<p>1. 说明1的内容。</p>
+				<p>2. 说明2的内容内容内容内容内容内容内容内容内容内容内容。</p>
+			</div>
+		</div>
+		</script>
+
+		<!--限购查询:结果页-->
+		<script type="text/x-template" id="xiangou-result-template">
+		<div>
+			<h1>查询结果</h1>
+			<div>查询结果说明查询结果说明查说明查询结果说明</div>
+			<router-link to="/xiangou" class="nav-btn">重新查询</router-link>
+			<div>
+				<p>己回答问题：</p>
+				<ul>
+					<li>你要在哪里买房？浦东</li>
+					<li>个人还是公司？个人</li>
+				</ul>
+			</div>
+		</div>
+		</script>
+
+		<script type="text/javascript">
+		//组件：公共头
+		Vue.component("my-header", {
+			template: '#header-template',
+			props: ['showCancel'],
+			methods: {
+				goback: function(){//后退
+					//到了限购首页，则后退到“成交宝”首页
+					if(app.$router.history.current.fullPath == '/xiaogu'){
+						app.$router.push({path:'/'});
+					};
+					//到了“成交宝”首页，则后退到APP首页
+					if(app.$router.history.current.fullPath == '/'){
+						console.log('这里要调原生APP的接口，回到APP的首页去');
+						return false;
+					};
+					//正常后退一步
+					app.$router.go(-1);
+				}
+			}
+		});
+		//组件：成交宝－导航
+		var Nav = {
+			template: '#navigation-template'
+		}
+		//组件：限购查询－首页
+		var XianGouHomepage = {
+			template : '#xiangou-homepage-template'
+		}
+		
+		//组件：限购查询－选择题
+		var QuestionRadio = {
+			template : '#question-radio-template'
+		}
+		//组件：限购查询－输入数字题
+		var QuestionInput = {
+			template : '#question-input-template'
+		}
+		//组件：限购查询－结果页
+		var XianGouResult = {
+			template : '#xiangou-result-template'
+		}
+		
+		/*var Question = {
+			template: '<component :is="currentQuestionView"></component>'
+		}*/
+
+		//路由配置
+		var routes = [
+			{ path: '/', component: Nav },
+			{ path: '/xiangou', component: XianGouHomepage },
+			{ 
+				path: '/xiangou/question/:qid', 
+				component: Question
+			},
+			{ path: '/xiangou/result', component: XianGouResult }
+		]
+		var router = new VueRouter({
+			routes : routes,
+			
+		});
+		
+
+		//根实例
+		var app = new Vue({
+			el: "#app",
+			data: {
+				questions : {
+					1: {
+						description: "购房地？",
+						optionType: 'radio',
+						options:[
+							{
+								text: "浦东",
+								next: "2"
+							},
+							{
+								text: "浦西",
+								next: "3"
+							}
+						]
+					},
+					2 : {
+						description: "购房人是个人还是公司",
+						optionType: 'radio',
+						options:[
+							{
+								text: "个人",
+								next: "4"
+							},
+							{
+								text: "公司",
+								next: "5"
+							}
+						]
+					},
+					3: {
+						description: "输入啊输入框",
+						optionType: 'input',
+						options:[
+							{
+								text: "a+b+c>=2",
+								next: "6"
+							},
+							{
+								text: "a+b+c==1",
+								next: "7"
+							},
+							{
+								text: "a+b+c<=0",
+								next: "8"
+							}
+						]
+					},
+				},
+				currentQuestion: null,
+				currentQuestionView: QuestionRadio,
+				msg: "hello",
+				showCancel: true
+			},
+			router : router
+		});
+		
+
+		//路由跳转前的钩子
+		router.beforeEach(function(to, from, next){
+			console.log('to:');
+			console.log(to);
+			//处理导航头右上角“取消”按钮是否显示的逻辑
+			if(to.path == '/' || to.path == '/xiangou'){
+				app.showCancel = false;
+			}
+			else{
+				app.showCancel = true;
+			}
+
+			//处理根据问题类型选择不同模板的逻辑
+			if(to.path.indexOf('/xiangou/question/') != -1 && to.params.qid != null){
+				app.currentQuestion = app.questions[to.params.qid];
+				console.log(app.questions[to.params.qid].optionType);
+				switch(app.questions[to.params.qid].optionType){
+					case 'radio' : app.currentQuestionView = QuestionRadio; break;
+					case 'input' : app.currentQuestionView = QuestionInput; break;
+				}
+				console.log(app.currentQuestionView.template);
+			}
+			next();
+		});
+		</script>
+	</body>
+</html>
